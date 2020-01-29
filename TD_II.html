@@ -30,32 +30,26 @@
             </thead>
             <tbody>
             <tr>
-                <td><span></span>Partie<span></span></td>
                 <td><span></span>Essaie<span></span></td>
                 <td><span></span>Valeur<span></span></td>
             </tr>
             <tr>
-                <td id="tab1.1"></td>
                 <td id="tab1.2"></td>
                 <td id="tab1.3"></td>
             </tr>
             <tr>
-                <td id="tab2.1"></td>
                 <td id="tab2.2"></td>
                 <td id="tab2.3"></td>
             </tr>
             <tr>
-                <td id="tab3.1"></td>
                 <td id="tab3.2"></td>
                 <td id="tab3.3"></td>
             </tr>
             <tr>
-                <td id="tab4.1"></td>
                 <td id="tab4.2"></td>
                 <td id="tab4.3"></td>
             </tr>
             <tr>
-                <td id="tab5.1"></td>
                 <td id="tab5.2"></td>
                 <td id="tab5.3"></td>
             </tr>
@@ -70,55 +64,49 @@
 </footer>
 </body>
 <script>
-    let n = Math.round(Math.random() * 100);
+    let randNbr = Math.round(Math.random() * 101);
     var table = [];
-    var i = 0;
-    var p = 0;
+    var turn = 1;
 
     function randreset(){
-        n = Math.round(Math.random() * 100);
-        i = i + 1;
+        randNbr = Math.round(Math.random() * 101);
+        turn = 1;
     }
 
     function FindNumber(){
         var x = document.getElementById("myText").value;
-        document.getElementById("rend").innerHTML = n;
-            if (x < 0 || x > 100){
-                document.getElementById("demo").innerHTML = "Enter a number between 0 and 100";
+        document.getElementById("rend").innerHTML = randNbr;
+        if (x < 0 || x > 100) {
+            document.getElementById("demo").innerHTML = "Enter a number between 0 and 100";
+        }
+        else if (randNbr < x) {
+            document.getElementById("demo").innerHTML = "C'est plus petit";
+            turn++;
+        }
+        else if (randNbr > x) {
+            document.getElementById("demo").innerHTML = "C'est plus grand";
+            turn++;
+        }
+        else if (randNbr === x) {
+            document.getElementById("demo").innerHTML = "Gagné";
+            table.push({
+                essaie: turn,
+                valeur: randNbr
+            });
+            if (table.length >= 6){
+                table.shift();
             }
-            else if (n < x){
-                document.getElementById("demo").innerHTML = "C'est plus petit";
-                p++;
-            }
-            else if (n > x){
-                document.getElementById("demo").innerHTML = "C'est plus grand";
-                p++;
-            }
-            else if (n == x){
-                document.getElementById("demo").innerHTML = "Gagner";
-                p++;
-                var game = {
-                    partie: i+1,
-                    essaie: p,
-                    valeur: n
-                }
-                table[i] = game;
-                if (table.length >= 6){
-                    table.shift();
-                }
-                addTable();
-                randreset();
-            }
+            addTable();
+            randreset();
+        }
     }
 
     function Re(){
         document.getElementById("demo").innerHTML = "Perdu !";
-        var game = {
-            partie: i+1,
+        table.push({
             essaie: '-1',
-            valeur: n
-        }
-        table[i] = game;
+            valeur: randNbr
+        });
         if (table.length >= 6){
             table.shift();
         }
@@ -127,19 +115,14 @@
     }
 
     function addTable(){
-        document.getElementById("tab1.1").innerHTML = table[0].partie;
         document.getElementById("tab1.2").innerHTML = table[0].essaie;
         document.getElementById("tab1.3").innerHTML = table[0].valeur;
-        document.getElementById("tab2.1").innerHTML = table[1].partie;
         document.getElementById("tab2.2").innerHTML = table[1].essaie;
         document.getElementById("tab2.3").innerHTML = table[1].valeur;
-        document.getElementById("tab3.1").innerHTML = table[2].partie;
         document.getElementById("tab3.2").innerHTML = table[2].essaie;
         document.getElementById("tab3.3").innerHTML = table[2].valeur;
-        document.getElementById("tab4.1").innerHTML = table[3].partie;
         document.getElementById("tab4.2").innerHTML = table[3].essaie;
         document.getElementById("tab4.3").innerHTML = table[3].valeur;
-        document.getElementById("tab5.1").innerHTML = table[4].partie;
         document.getElementById("tab5.2").innerHTML = table[4].essaie;
         document.getElementById("tab5.3").innerHTML = table[4].valeur;
     }
