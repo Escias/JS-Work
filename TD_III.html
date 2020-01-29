@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="javascript.css">
+    <title>TD_III</title>
+</head>
+<body>
+<form onsubmit="return false">
+    <div class="all">
+        <div>
+            <p>Player Name : <input type="text" name="name" size="25" id="myName"></p>
+            <input type="submit" value="Commencer" onclick="Begin()">
+        </div>
+        <div style="visibility: hidden" id="input">
+            <input class="choice" type="submit" value="Pierre" id="pierre" onclick="PFC(0)">
+            <input class="choice" type="submit" value="Feuille" id="feuille" onclick="PFC(1)">
+            <input class="choice" type="submit"  value="Ciseaux" id="ciseaux" onclick="PFC(2)">
+            <input type="submit" value="Recommencer" onclick="Relaunch()">
+        </div>
+        <div>
+            <p id="resultat"></p>
+            <p id="ia"></p>
+        </div>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="2"><span></span><span></span>score<span></span><span></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><span></span>Joueur<span></span></td>
+                    <td><span></span>Manche<span></span></td>
+                </tr>
+                <tr>
+                    <td id="tab1.1"></td>
+                    <td id="tab1.2"></td>
+                </tr>
+                <tr>
+                    <td id="tab2.1"></td>
+                    <td id="tab2.2"></td>
+                </tr>
+                <tr>
+                    <td id="tab3.1"></td>
+                    <td id="tab3.2"></td>
+                </tr>
+                <tr>
+                    <td id="tab4.1"></td>
+                    <td id="tab4.2"></td>
+                </tr>
+                <tr>
+                    <td id="tab5.1"></td>
+                    <td id="tab5.2"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="marge"></div>
+    </div>
+</form>
+<footer>
+    <div>
+        <p>TD_III > Pierre, Feuille, Ciseaux by Jimmy L., Anthony B., Clément N., Axel P.</p>
+    </div>
+</footer>
+</body>
+<script>
+    var n = Math.round(Math.random() * 2);
+    var SS = [];
+    var i = 0;
+    var manche = 0;
+    var end = true;
+    var result;
+    var ia;
+
+    function Begin(){
+        document.getElementById("resultat").innerHTML = "";
+        document.getElementById("ia").innerHTML = "";
+        checkname = document.getElementById("myName").value;
+        if (checkname != ""){
+            document.getElementById("input").style.visibility = "visible";
+            timer = setTimeout("Re()", 3000);
+        }else{
+            document.getElementById("resultat").innerHTML = "Enter Your Name";
+        }
+    }
+
+    function resetIA(){
+        while (ia == n){
+            n = Math.round(Math.random() * 2);
+        }
+        ia = n;
+        return ia;
+    }
+
+    function ranreset() {
+        n = Math.round(Math.random() * 2);
+        manche = manche + 1;
+    }
+
+    function endreset(){
+        n = Math.round(Math.random() * 2);
+        manche = 0;
+        end = true;
+    }
+
+    function PFC(c){
+        window.clearTimeout(timer);
+        var choice = resetIA();
+        var name = document.getElementById("myName").value;
+        if (end == true){
+            if (manche < 42){
+                if (choice == 0){
+                    document.getElementById("ia").innerHTML = "Choix de l'IA : Pierre";
+                    if (c == 0){
+                        document.getElementById("resultat").innerHTML = "Egalité !";
+                    }else if (c == 1){
+                        document.getElementById("resultat").innerHTML = "Gagné !";
+                    }else if (c == 2){
+                        document.getElementById("resultat").innerHTML = "Perdu !";
+                        end = false;
+                    }
+                }
+                else if (choice == 1){
+                    document.getElementById("ia").innerHTML = "Choix de l'IA : Feuille";
+                    if (c == 0){
+                        document.getElementById("resultat").innerHTML = "Perdu !";
+                        end = false;
+                    }else if (c == 1){
+                        document.getElementById("resultat").innerHTML = "Egalité !";
+                    }else if (c == 2){
+                        document.getElementById("resultat").innerHTML = "Gagné !";
+                    }
+                }
+                else if (choice == 2){
+                    document.getElementById("ia").innerHTML = "Choix de l'IA : Ciseaux";
+                    if (c == 0){
+                        document.getElementById("resultat").innerHTML = "Gagné !";
+                    }else if (c == 1){
+                        document.getElementById("resultat").innerHTML = "Perdu !";
+                        end = false;
+                    }else if (c == 2){
+                        document.getElementById("resultat").innerHTML = "Egalité !";
+                    }
+                }
+            }else {
+                document.getElementById("resultat").innerHTML = "Perdu !";
+                result = "Perdu !";
+                end = false;
+                if (c == 0){
+                    document.getElementById("ia").innerHTML = "Choix de l'IA : Feuille";
+                }else if (c == 1){
+                    document.getElementById("ia").innerHTML = "Choix de l'IA : Ciseaux";
+                }else if (c == 2){
+                    document.getElementById("ia").innerHTML = "Choix de l'IA : Pierre";
+                }
+            }
+            if (end == true){
+                ranreset();
+            }
+        }
+        if (end == false){
+            document.getElementById("input").style.visibility = "hidden";
+            var game = {
+                Joueur: name,
+                Manche: manche
+            }
+            SS.push(game)
+            SortTable();
+            endreset();
+        }
+    }
+
+    function Relaunch(){
+        window.clearTimeout(timer);
+        var name = document.getElementById("myName").value;
+        document.getElementById("resultat").innerHTML = "Perdu !";
+        document.getElementById("ia").innerHTML = "";
+        var game = {
+            Joueur: name,
+            Manche: manche
+        }
+        SS.push(game)
+        SortTable();
+        Begin();
+        endreset();
+    }
+
+    function Re(){
+        var name = document.getElementById("myName").value;
+        document.getElementById("resultat").innerHTML = "Perdu !";
+        document.getElementById("ia").innerHTML = "";
+        var game = {
+            Joueur: name,
+            Manche: manche
+        }
+        SS.push(game)
+        document.getElementById("input").style.visibility = "hidden";
+        window.clearTimeout(timer);
+        SortTable();
+        endreset();
+    }
+
+    function SortTable() {
+        SS.sort((a, b) => b.Manche - a.Manche);
+        if (SS.length > 5){
+            SS.pop();
+        }
+        document.getElementById("tab1.1").innerHTML = SS[0].Joueur;
+        document.getElementById("tab1.2").innerHTML = SS[0].Manche;
+        document.getElementById("tab2.1").innerHTML = SS[1].Joueur;
+        document.getElementById("tab2.2").innerHTML = SS[1].Manche;
+        document.getElementById("tab3.1").innerHTML = SS[2].Joueur;
+        document.getElementById("tab3.2").innerHTML = SS[2].Manche;
+        document.getElementById("tab4.1").innerHTML = SS[3].Joueur;
+        document.getElementById("tab4.2").innerHTML = SS[3].Manche;
+        document.getElementById("tab5.1").innerHTML = SS[4].Joueur;
+        document.getElementById("tab5.2").innerHTML = SS[4].Manche;
+    }
+</script>
+</html>

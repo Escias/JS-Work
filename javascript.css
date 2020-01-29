@@ -1,0 +1,85 @@
+
+body{
+    border-style: solid;
+    box-shadow: 0px 0px 15px 15px rgba(211, 211, 211, 0.6);
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+
+input{
+    outline: none;
+    box-shadow: 0 5px lightgrey;
+}
+input:active{
+    transform: translateY(3px);
+    box-shadow: 0 2px lightgrey;
+}
+
+footer{
+    margin-left: 3%;
+}
+
+footer div p{
+    font-size: 10px;
+}
+
+button:active{
+    
+}
+
+.all{
+    margin-left: 3%;
+}
+
+.choice{
+    font-size: 100px;
+}
+
+.marge{
+    padding-top: 200px;
+}
+
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+span{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button{
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+.choice{
+    margin-left: 3%;
+}
+.blue{
+    background-color: blue;
+}
+.black{
+    background-color: black;
+}
+.green{
+    background-color: green;
+}
+.yellow{
+    background-color: yellow;
+}
+.red{
+   background-color: red;
+}
+.white{
+    background-color: white;
+}

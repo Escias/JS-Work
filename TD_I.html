@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="javascript.css">
+    <title>TD_I</title>
+</head>
+<body>
+<footer>
+    <div>
+        <p>TD_I > Exercice sur console by Jimmy L., Anthony B., Clément N., Axel P.</p>
+    </div>
+</footer>
+</body>
+<script>
+    let exoB;
+    exoB = 42;
+    switch (typeof exoB) {
+        case ('string'):
+            console.log("C'est une chaîne de caractères");
+            break;
+        case ('boolean'):
+            console.log(typeof exoB);
+            break;
+        case ('number'):
+            console.log(typeof exoB);
+            break;
+        default:
+            break;
+    }
+    
+    let i = 0;
+    while(i<=9){
+        console.log(i);
+        ++i;
+    }
+
+    let exoD = 42;
+    function isEven(exoD) {
+        if(typeof exoD !== 'number'){
+            exoD = -1;
+            return (exoD);
+        }
+        else if(exoD % 2 == 0){
+            exoD = 0;
+            return (exoD);
+        }
+        else if(exoD % 2 != 0){
+            exoD = 1;
+            return (exoD);
+        }
+    }
+    console.log(isEven(exoD));
+
+    let exoE_A = 30;
+    let exoE_B = 32;
+    function compareA_B(exoE_A, exoE_B) {
+        if (typeof exoE_A !== 'number'){
+            return "error";
+        }else if(exoE_A < exoE_B){
+            return "-1";
+        }else if(exoE_A == exoE_B){
+            return "0";
+        }else if(exoE_A > exoE_B){
+            return "1";
+        }
+    }
+    console.log(compareA_B(exoE_A, exoE_B));
+</script>
+</html>
