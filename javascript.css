@@ -18,15 +18,57 @@ input:active{
 }
 
 footer{
+    border-top: solid;
+}
+footer div{
     margin-left: 3%;
 }
-
 footer div p{
     font-size: 10px;
 }
 
+button{
+    outline: none;
+    box-shadow: 0 5px lightgrey;
+}
 button:active{
-    
+    transform: translateY(3px);
+    box-shadow: 0 2px lightgrey;
+}
+
+.line{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin-top: 0.3%;
+    margin-bottom: 0.3%;
+}
+
+.dot{
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dott{
+    height: 50px;
+    width: 50px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.jeu{
+    margin-left: 1%;
+    border-style: solid;
+    padding: 0.5%;
+}
+
+.indice{
+    margin-left: 1%;
+    border-style: solid;
+    padding: 0.5%;
 }
 
 .all{
@@ -52,18 +94,24 @@ tfoot {
     color: #fff;
 }
 
-span{
+/*span{
     margin-left: 5px;
     margin-right: 5px;
-}
+}*/
 
 button{
     height: 80px;
     width: 80px;
     border-radius: 100%;
 }
+
+.table{
+    margin-left: 3%;
+}
+
 .choice{
     margin-left: 3%;
+    margin-top: 2%;
 }
 .blue{
     background-color: blue;
