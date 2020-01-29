@@ -8,6 +8,25 @@ body{
     border-bottom-right-radius: 35px;
 }
 
+#div1 {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+#div2 {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+#div3 {
+    width: 350px;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+
 input{
     outline: none;
     box-shadow: 0 5px lightgrey;

@@ -11,10 +11,10 @@
         <input type="submit" value="Commencer" onclick="Schema()">
     </div>
     <div>
-        <span class="dott"></span>
-        <span class="dott"></span>
-        <span class="dott"></span>
-        <span class="dott"></span>
+        <span class="dott" id="sch1"></span>
+        <span class="dott" id="sch2"></span>
+        <span class="dott" id="sch3"></span>
+        <span class="dott" id="sch4"></span>
     </div>
     <div class="table">
         <div class="line">
@@ -191,27 +191,23 @@
                 </div>
             </div>
             <div class="jeu">
-                <span class="dott"></span>
-                <span class="dott"></span>
-                <span class="dott"></span>
-                <span class="dott"></span>
+                <span class="dott" ondrop="drop(event)" ondragover="allowDrop(event)" ondragend="DelImg(event)"></span>
+                <span class="dott" ondrop="drop(event)" ondragover="allowDrop(event)" ondragend="DelImg(event)"></span>
+                <span class="dott" ondrop="drop(event)" ondragover="allowDrop(event)" ondragend="DelImg(event)"></span>
+                <span class="dott" ondrop="drop(event)" ondragover="allowDrop(event)" ondragend="DelImg(event)"></span>
+                <input type="submit" value="Confirmer" onclick="">
             </div>
         </div>
     </div>
     <div class="choice">
-        <button value="0" id="blue" class="blue"></button>
-        <button value="1" id="black" class="black"></button>
-        <button value="2" id="green" class="green"></button>
-        <button value="3" id="yellow" class="yellow"></button>
-        <button value="4" id="red" class="red"></button>
-        <button value="5" id="white" class="white"></button>
-    </div>
-    <div>
-        <p>Drag color</p>>
-
-        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <br>
-        <img id="drag1" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69">
+        <div id="newimg">
+            <img id="blue1" src="image/blue.png" draggable="true" ondragstart="drag(event),NewImage('blue', 'blue.png')" width="50" height="50">
+            <img id="black1" src="image/black.jpg" draggable="true" ondragstart="drag(event),NewImage('black', 'black.jpg')" width="50" height="50">
+            <img id="green1" src="image/green.png" draggable="true" ondragstart="drag(event),NewImage('green', 'green.png')" width="50" height="50">
+            <img id="yellow1" src="image/yellow.png" draggable="true" ondragstart="drag(event),NewImage('yellow', 'yellow.png')" width="50" height="50">
+            <img id="red1" src="image/red.png" draggable="true" ondragstart="drag(event),NewImage('red', 'red.png')" width="50" height="50">
+            <img id="purple1" src="image/purple.png" draggable="true" ondragstart="drag(event),NewImage('purple', 'purple.png')" width="50" height="50">
+        </div>
     </div>
 </form>
 <footer>
@@ -229,6 +225,29 @@
             n = Math.round(Math.random() * 5);
             schema.push(n);
         }
+        if (schema[0] == 1){
+
+        }
+    }
+
+    var i = 2;
+
+    function DelImg(ev) {
+        idImg = ev.target.id;
+        document.getElementById(idImg).setAttribute("ondragstart", "drop(event)");
+    }
+
+    function NewImage(color, file){
+        var img = document.createElement("img");
+        img.setAttribute("id", color+i);
+        img.setAttribute("draggable", "true");
+        img.setAttribute("ondragstart", "drag(event),NewImage()");
+        img.setAttribute("width", "50");
+        img.setAttribute("height", "50");
+        img.src = "image/"+file;
+        var src = document.getElementById("newimg");
+        src.appendChild(img);
+        ++i;
     }
 
     function allowDrop(ev) {
@@ -244,8 +263,6 @@
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
     }
-
-
 
     // 0 = BLUE
     // 1 = BLACK
