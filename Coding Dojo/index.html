@@ -246,7 +246,6 @@
     }
 
 
-
     function autoClicking(autoInfo) {
         score += autoInfo.amount;
         money += autoInfo.amount;
@@ -424,6 +423,7 @@
         return i;
     }
 
+    //  Save all data to a json then display it in the browser
     function save() {
         let savelog = JSON.stringify(
             [
@@ -455,6 +455,7 @@
         doc.children[0].innerHTML = savelog;
     }
 
+    // take a json string, parse it then use the data to load a game
     function load() {
         let data = document.getElementById("load").value;
         let parsedData = JSON.parse(data);
