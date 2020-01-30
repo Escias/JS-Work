@@ -8,22 +8,22 @@
 <body onload="startTime()">
 <form onsubmit="return false">
 </form>
-<div>
-    <div class="enter">
-        <div>
-            <p>Player Name : <input type="text" name="name" size="25" id="myName"></p>
-        </div>
-        <div>
-            <div id="txt"></div>
-        </div>
-    </div>
     <div>
-        <input type="submit" value="Begin" onclick="Begin()">
-        <input type="submit" value="Recommencer" onclick="">
+        <div class="enter">
+            <div>
+                <p>Player Name : <input type="text" name="name" size="25" id="myName"></p>
+            </div>
+            <div>
+                <div id="txt"></div>
+                <label id="minutes">00</label>:<label id="seconds">00</label>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Begin" onclick="Begin()">
+            <input type="submit" value="Recommencer" onclick="">
+        </div>
+        <p id="check">...</p>
     </div>
-    <p id="check">...</p>
-</div>
-<div>
     <div class="tamago">
         <div>
             <img class="tama" id="tama" src="img/tama.png">
@@ -55,18 +55,8 @@
     var score = 0;
     var achiev = [];
     var pre = 0;
-
     var add = 1;
     var mult = 1;
-
-    function Begin(){
-        checkname = document.getElementById("myName").value;
-        if (checkname != ""){
-            document.getElementById("tama").setAttribute("onclick", "clickImg()");
-        }else{
-            document.getElementById("check").innerHTML = "Enter Your Name";
-        }
-    }
 
     var autoClicker = [
         {
@@ -123,6 +113,17 @@
         document.getElementById("score").innerHTML = score;
     }
 
+    function Begin(){
+        checkname = document.getElementById("myName").value;
+        if (checkname != ""){
+            document.getElementById("tama").setAttribute("onclick", "clickImg()");
+            document.getElementById("check").innerHTML = "...";
+            StartCount();
+        }else{
+            document.getElementById("check").innerHTML = "Enter Your Name";
+        }
+    }
+
     function clickImg(){
         click++;
         score += (add * mult * multipre);
@@ -136,6 +137,23 @@
         if (score % 10000 == 0){
             prestige();
         }
+    }
+    //✗
+//✓
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =
+            h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
     }
     //✗
 //✓
@@ -204,9 +222,30 @@
 
 
 
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
 
+    function StartCount(){
+        setInterval(setTime, 1000);
+    }
 
-    function startTime() {
+    function setTime(){
+        ++totalSeconds;
+        secondsLabel.innerHTML = pad(totalSeconds%60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+    }
+
+    function pad(val){
+        var valString = val + "";
+        if (valString.length < 2){
+            return "0" + valString;
+        }else {
+            return valString;
+        }
+    }
+
+    function startTime(){
         var today = new Date();
         var h = today.getHours();
         var m = today.getMinutes();
@@ -218,9 +257,10 @@
         var t = setTimeout(startTime, 500);
     }
     function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        if (i < 10) {
+            i = "0" + i
+        }
         return i;
     }
-
 </script>
 </html>
