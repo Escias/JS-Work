@@ -19,8 +19,10 @@
             </div>
         </div>
         <div>
-            <input type="submit" value="Begin" onclick="Begin()">
-            <input type="submit" value="Recommencer" onclick="">
+            <div>
+                <input type="submit" value="Begin" onclick="Begin()">
+                <input type="submit" value="Recommencer" onclick="">
+            </div>
         </div>
         <p id="check">...</p>
     </div>
@@ -43,6 +45,17 @@
         <button onclick="">Auto-Clicker Rank.3</button>
     </div>
 </div>
+<form onsubmit="return false">
+    <label for="skin">Choose your skin : </label>
+    <select name="skin" id="skin">
+        <option id="">--Choose your skin--</option>
+        <option value="Nijifuwatchi">Nijifuwatchi</option>
+        <option value="Yumemitchi">Yumemitchi</option>
+        <option value="Mametchi">Mametchi</option>
+        <option value="Chamametchi">Chamametchi</option>
+    </select>
+    <input type="submit" value="Change Skin" onclick="Skin()">
+</form>
 <footer>
     <div>
         <p>Coding Dojo > Clicker by Jimmy L., Anthony B., Clément N., Axel P.</p>
@@ -50,7 +63,7 @@
 </footer>
 </body>
 <script>
-    var click = 1;
+    var click = 0;
     var multipre = 1;
     var score = 0;
     var achiev = [];
@@ -134,10 +147,10 @@
         if (click % 100 == 0){
             achievement(click);
         }
-        if (score % 10000 == 0){
-            prestige();
-        }
+        setInterval(prestige(score), 1000);
     }
+
+
     //✗
 //✓
     function startTime() {
@@ -211,12 +224,28 @@
                 break;
         }
     }
+    var test = 120760;
 
-    function prestige(){
-        pre += 1;
+
+    function prestige(score){
+        pre = Math.floor(score / 10000);
         pres = "Prestige Level "+ pre;
         document.getElementById("prestige").innerHTML = pres;
-        ++multipre;
+        multipre == pre;
+    }
+
+    function Skin() {
+        var e = document.getElementById("skin");
+        var strUser = e.options[e.selectedIndex].value;
+        if (strUser == "Nijifuwatchi"){
+            document.getElementById("tama").setAttribute("src", "img/tama.png")
+        }else if (strUser == "Yumemitchi"){
+            document.getElementById("tama").setAttribute("src", "img/tama2.jpeg")
+        }else if (strUser == "Mametchi"){
+            document.getElementById("tama").setAttribute("src", "img/tama3.png")
+        }else if (strUser == "Chamametchi"){
+            document.getElementById("tama").setAttribute("src", "img/tama4.png")
+        }
     }
 
 
