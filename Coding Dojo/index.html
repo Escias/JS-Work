@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clicker.css">
-    <title>Clicker</title>
+    <title>Tama Clicker</title>
 </head>
-<body>
+<body onload="startTime()">
 <form onsubmit="return false">
 </form>
+    <div>
+        <div class="enter">
+            <div>
+                <p>Player Name : <input type="text" name="name" size="25" id="myName"></p>
+            </div>
+            <div>
+                <div id="txt"></div>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Begin" onclick="Begin()">
+            <input type="submit" value="Recommencer" onclick="">
+        </div>
+        <p id="check">...</p>
+    </div>
     <div class="tamago">
         <div>
-            <img class="tama" src="img/tama.png"  onclick="clickImg()">
+            <img class="tama" id="tama" src="img/tama.png">
         </div>
         <div>
             <p id="score">0</p>
         </div>
     </div>
-
+    <div>
+        <p id="prestige">Prestige Level 0</p>
+    </div>
 <footer>
     <div>
         <p>Coding Dojo > Clicker by Jimmy L., Anthony B., Clément N., Axel P.</p>
@@ -24,10 +41,118 @@
 </footer>
 </body>
 <script>
-    score = 0;
+    var click = 1;
+    var multipre = 1;
+    var score = 0;
+    var achiev = [];
+    var pre = 0;
+
+    function Begin(){
+        checkname = document.getElementById("myName").value;
+        if (checkname != ""){
+            document.getElementById("tama").setAttribute("onclick", "clickImg()");
+        }else{
+            document.getElementById("check").innerHTML = "Enter Your Name";
+        }
+    }
+
     function clickImg(){
-        score += 1;
+        click = (1 * multipre);
+        score += click;
         document.getElementById("score").innerHTML = score;
+        if (click == 1){
+            achievement(click)
+        }
+        if (click % 100 == 0){
+            achievement(click);
+        }
+        if (score % 10000 == 0){
+            prestige();
+        }
+    }
+    //✗
+//✓
+    function achievement(click){
+        switch (click) {
+            case 1:
+                achiev.push("First click");
+                break;
+            case 100:
+                achiev.push("Hundred clicks");
+                break;
+            case 500:
+                achiev.push("Half of Thousand");
+                break;
+            case 1000:
+                achiev.push("It's just the beginning");
+                break;
+            case 2000:
+                achiev.push("More ?");
+                break;
+            case 5000:
+                achiev.push("Need a challenge ?");
+                break;
+            case 6000:
+                achiev.push("You can never reach 10000");
+                break;
+            case 10000:
+                achiev.push("First Prestige !");
+                break;
+            case 50000:
+                achiev.push("Points is nothing, you know ?");
+                break;
+            case 100000:
+                achiev.push("Prestige Level 10 !");
+                break;
+            case 500000:
+                achiev.push("On the way to the First Million");
+                break;
+            case 1000000:
+                achiev.push("BUY YOURSELF A LIFE");
+                break;
+            case 10000000:
+                achiev.push("REALLY ?!");
+                break;
+            case 100000000:
+                achiev.push("READY FOR the billion ?");
+                break;
+            case 500000000:
+                achiev.push("On the road !!");
+                break;
+            case 1000000000:
+                achiev.push("STILL ALIVE ?");
+                break;
+            default:
+                break;
+        }
+    }
+
+    function prestige(){
+        pre += 1;
+        pres = "Prestige Level "+ pre;
+        document.getElementById("prestige").innerHTML = pres;
+        ++multipre;
+    }
+
+
+
+
+
+
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =
+            h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
     }
 </script>
 </html>
