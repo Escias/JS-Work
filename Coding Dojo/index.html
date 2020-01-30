@@ -89,6 +89,53 @@
     var priceAutoClicAmount1 = 100;
     var priceAutoClicAmount2 = 300;
     var priceAutoClicAmount3 = 700;
+    var name = "";
+
+    var autoClicker = [
+        {
+            rank: 1,
+            amount: 0,
+            timer: 1000
+        },
+        {
+            rank: 2,
+            amount: 0,
+            timer: 5000
+        },
+        {
+            rank: 3,
+            amount: 0,
+            timer: 10000
+        }
+    ];
+
+    var buyingDic = [
+        {
+            id: 0,
+            lvl: 0,
+            cost: 5
+        },
+        {
+            id: 1,
+            lvl: 0,
+            cost: 10
+        },
+        {
+            id: 2,
+            lvl: 0,
+            cost: 20
+        },
+        {
+            id: 3,
+            lvl: 0,
+            cost: 40
+        },
+        {
+            id: 4,
+            lvl: 0,
+            cost: 50
+        },
+    ];
 
     function buyMod(choice) {
 
@@ -198,51 +245,7 @@
     	}
     }
 
-    var autoClicker = [
-        {
-            rank: 1,
-            amount: 0,
-            timer: 1000
-        },
-        {
-            rank: 2,
-            amount: 0,
-            timer: 5000
-        },
-        {
-            rank: 3,
-            amount: 0,
-            timer: 10000
-        }
-    ];
 
-    var buyingDic = [
-        {
-            id: 0,
-            lvl: 0,
-            cost: 5
-        },
-        {
-            id: 1,
-            lvl: 0,
-            cost: 10
-        },
-        {
-            id: 2,
-            lvl: 0,
-            cost: 20
-        },
-        {
-            id: 3,
-            lvl: 0,
-            cost: 40
-        },
-        {
-            id: 4,
-            lvl: 0,
-            cost: 50
-        },
-    ];
 
     function autoClicking(autoInfo) {
         score += autoInfo.amount;
@@ -251,7 +254,7 @@
     }
 
     function Begin(){
-        let checkname = document.getElementById("myName").value;
+        name = document.getElementById("myName").value;
         if (checkname != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
@@ -259,7 +262,8 @@
    			var chronoAuto2 = (setInterval("autoClicking(autoClicker[1])", autoClicker[1].timer));
    			var chronoAuto3 = (setInterval("autoClicking(autoClicker[2])", autoClicker[2].timer));
             StartCount();
-        }else{
+        }
+        else {
             document.getElementById("check").innerHTML = "Enter Your Name";
         }
     }
@@ -442,12 +446,13 @@
                     "priceAutoClicAmount1": priceAutoClicAmount1,
                     "priceAutoClicAmount2": priceAutoClicAmount2,
                     "priceAutoClicAmount3": priceAutoClicAmount3,
+                    "name": name
                 }
             ]
         );
         let doc = document.getElementById("saving-box");
         doc.style.visibility = "visible";
-        doc.children[0].innerHTML += savelog;
+        doc.children[0].innerHTML = savelog;
     }
 
     function load() {
@@ -471,6 +476,7 @@
         priceAutoClicAmount1 = parsedData.priceAutoClicAmount1;
         priceAutoClicAmount2 = parsedData.priceAutoClicAmount2;
         priceAutoClicAmount3 = parsedData.priceAutoClicAmount3;
+        name = parsedData.name;
     }
 </script>
 </html>
