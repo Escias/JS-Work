@@ -2,14 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="clicker.css">
     <title>Clicker</title>
 </head>
 <body>
 <form onsubmit="return false">
-    
 </form>
+    <div class="tamago">
+        <div>
+            <img class="tama" src="img/tama.png"  onclick="clickImg()">
+        </div>
+        <div>
+            <p id="score">0</p>
+        </div>
+    </div>
+
+<footer>
+    <div>
+        <p>Coding Dojo > Clicker by Jimmy L., Anthony B., Clément N., Axel P.</p>
+    </div>
+</footer>
 </body>
 <script>
-
+    score = 0;
+    function clickImg(){
+        score += 1;
+        document.getElementById("score").innerHTML = score;
+    }
 </script>
 </html>
