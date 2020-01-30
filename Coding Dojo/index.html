@@ -12,6 +12,7 @@
         <div class="enter">
             <div>
                 <p>Player Name : <input type="text" name="name" size="25" id="myName"></p>
+                <p>Load game : <input type="text" name="load" size="25" id="load"></p>
             </div>
             <div>
                 <div id="txt"></div>
@@ -21,6 +22,7 @@
         <div>
             <div>
                 <input type="submit" value="Begin" onclick="Begin()">
+                <input type="submit" value="Load" onclick="load()">
                 <input type="submit" value="Recommencer" onclick="">
             </div>
             <div>
@@ -62,6 +64,10 @@
 <footer>
     <div>
         <p>Coding Dojo > Tama Clicker by Jimmy L., Anthony B., Clément N., Axel P.</p>
+    </div>
+    <button onclick="save()">Save</button>
+    <div id="saving-box" style="visibility: hidden">
+        <p>Copy this: </p>
     </div>
 </footer>
 </body>
@@ -245,7 +251,7 @@
     }
 
     function Begin(){
-        checkname = document.getElementById("myName").value;
+        let checkname = document.getElementById("myName").value;
         if (checkname != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
@@ -412,6 +418,59 @@
             i = "0" + i
         }
         return i;
+    }
+
+    function save() {
+        let savelog = JSON.stringify(
+            [
+                {
+                    "click": click,
+                    "multipre": multipre,
+                    "score": score,
+                    "money": money,
+                    "achiev": achiev,
+                    "pre": pre,
+                    "add": add,
+                    "mult": mult,
+                    "autoClicker": autoClicker,
+                    "buyingDic": buyingDic,
+                    "priceAdd": priceAdd,
+                    "priceMult": priceMult,
+                    "priceAutoClicTimer1": priceAutoClicTimer1,
+                    "priceAutoClicTimer2": priceAutoClicTimer2,
+                    "priceAutoClicTimer3": priceAutoClicTimer3,
+                    "priceAutoClicAmount1": priceAutoClicAmount1,
+                    "priceAutoClicAmount2": priceAutoClicAmount2,
+                    "priceAutoClicAmount3": priceAutoClicAmount3,
+                }
+            ]
+        );
+        let doc = document.getElementById("saving-box");
+        doc.style.visibility = "visible";
+        doc.children[0].innerHTML += savelog;
+    }
+
+    function load() {
+        let data = document.getElementById("load").value;
+        let parsedData = JSON.parse(data);
+        click = parsedData.click;
+        multipre =  parsedData.multipre;
+        score = parsedData.score;
+        money = parsedData.money;
+        achiev = parsedData.achiev;
+        pre = parsedData.pre;
+        add = parsedData.add;
+        mult = parsedData.mult;
+        autoClicker = parsedData.autoClicker;
+        buyingDic = parsedData.buyingDic;
+        priceAdd = parsedData.;
+        priceMult = parsedData.;
+        priceAutoClicTimer1 = parsedData.priceAutoClicTimer1;
+        priceAutoClicTimer2 = parsedData.priceAutoClicTimer2;
+        priceAutoClicTimer3 = parsedData.priceAutoClicTimer3;
+        priceAutoClicAmount1 = parsedData.priceAutoClicAmount1;
+        priceAutoClicAmount2 = parsedData.priceAutoClicAmount2;
+        priceAutoClicAmount3 = parsedData.priceAutoClicAmount3;
     }
 </script>
 </html>
