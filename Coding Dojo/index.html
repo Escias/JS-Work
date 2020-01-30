@@ -42,18 +42,21 @@
             <img class="tama" id="tama" src="img/tama.png">
         </div>
         <div>
-            <p id="score">0</p>
+            <p id="money">0</p>
         </div>
     </div>
     <div>
         <p id="prestige">Prestige Level 0</p>
     </div>
     <div id="upgrades">
-        <button onclick="buyMod(0)">Additioners</button>
-        <button onclick="">Multiplicators</button>
-        <button onclick="">Auto-clicker Rank.1</button>
-        <button onclick="">Auto-Clicker Rank.2</button>
-        <button onclick="">Auto-Clicker Rank.3</button>
+        <button onclick="buyMod(0)" id="butAdd">Additioners [30]</button>
+        <button onclick="buyMod(1)" id="butMult">Multiplicators [80]</button>
+        <button onclick="buyMod(2)" id="butAutoTime1">Auto-clicker Timer Rank.1 [100]</button>
+        <button onclick="buyMod(3)" id="butAutoTime2">Auto-Clicker Timer Rank.2 [300]</button>
+        <button onclick="buyMod(4)" id="butAutoTime3">Auto-Clicker Timer Rank.3 [700]</button>
+        <button onclick="buyMod(5)" id="butAutoAmount1">Auto-clicker Bonus Rank.1 [100]</button>
+        <button onclick="buyMod(6)" id="butAutoAmount2">Auto-Clicker Bonus Rank.2 [300]</button>
+        <button onclick="buyMod(7)" id="butAutoAmount3">Auto-Clicker Bonus Rank.3 [700]</button>
     </div>
 </div>
 <footer>
@@ -64,12 +67,130 @@
 </body>
 <script>
     var click = 0;
+	const delayMult = 0.8;
     var multipre = 1;
     var score = 0;
+    var money = 0;
     var achiev = [];
     var pre = 0;
     var add = 1;
     var mult = 1;
+    var priceAdd = 30;
+    var priceMult = 80;
+    var priceAutoClicTimer1 = 100;
+    var priceAutoClicTimer2 = 300;
+    var priceAutoClicTimer3 = 700;
+    var priceAutoClicAmount1 = 100;
+    var priceAutoClicAmount2 = 300;
+    var priceAutoClicAmount3 = 700;
+
+    function buyMod(choice) {
+
+    	switch (choice) {
+    		case 0:
+    			if (money >= priceAdd) {
+    				money -= priceAdd;
+    				add++;
+    				priceAdd++;
+    				document.getElementById("butAdd").innerHTML = "Additioners [" + priceAdd + "]";
+    			}
+    			else
+    				console.log("Tu n'as pas assez de BARREL ROLL");
+    			break;
+    		case 1:
+    			if (money >= priceMult) {
+    				money -= priceMult;
+    				add *= 1.5;
+    				priceMult += 10;
+    				document.getElementById("butMult").innerHTML = "Multiplicators [" + priceMult + "]";
+    			}
+    			else
+    				console.log("Tu n'as pas assez de SAUCISSE");
+    			break;
+    		case 2:
+    			if (money >= priceAutoClicTimer1) {
+    				money -= priceAutoClicTimer1;
+    				autoClicker[0].timer *= delayMult;
+    				resetAutoClicker(0);
+    				priceAutoClicTimer1 *= 2;
+    				document.getElementById("butAutoTime1").innerHTML = "Auto-clicker Timer Rank.1 [" + priceAutoClicTimer1 + "]";
+				}
+    			else
+    				console.log("Tu n'as pas assez de BDZHUGDIJ");
+    			break;
+    		case 3:
+    			if (money >= priceAutoClicTimer2) {
+    				money -= priceAutoClicTimer2;
+    				autoClicker[1].timer *= delayMult;
+    				resetAutoClicker(1);
+    				priceAutoClicTimer2 *= 2;
+    				document.getElementById("butAutoTime2").innerHTML = "Auto-clicker Timer Rank.2 [" + priceAutoClicTimer2 + "]";
+    			}
+    			else
+    				console.log("Tu n'as pas assez de SCHNAPS");
+    			break;
+    		case 4:
+    			if (money >= priceAutoClicTimer3) {
+    				money -= priceAutoClicTimer3;
+    				autoClicker[2].timer *= delayMult;
+    				resetAutoClicker(2);
+    				priceAutoClicTimer3 *= 2;
+    				document.getElementById("butAutoTime3").innerHTML = "Auto-clicker Timer Rank.3 [" + priceAutoClicTimer3 + "]";
+    			}
+    			else
+    				console.log("Croustipute !");
+    			break;
+    		case 5:
+    			if (money >= priceAutoClicAmount1) {
+    				money -= priceAutoClicAmount1;
+    				autoClicker[0].amount += 5;
+    				priceAutoClicAmount1 *= 2;
+    				document.getElementById("butAutoAmount1").innerHTML = "Auto-clicker Timer Rank.1 [" + priceAutoClicAmount1 + "]";
+				}
+    			else
+    				console.log("Tu n'as pas assez de BDZHUGDIJ");
+    			break;
+    		case 6:
+    			if (money >= priceAutoClicAmount2) {
+    				money -= priceAutoClicAmount2;
+    				autoClicker[1].amount += 20;
+    				priceAutoClicAmount2 *= 2;
+    				document.getElementById("butAutoAmount2").innerHTML = "Auto-clicker Timer Rank.2 [" + priceAutoClicAmount2 + "]";
+    			}
+    			else
+    				console.log("Tu n'as pas assez de SCHNAPS");
+    			break;
+    		case 7:
+    			if (money >= priceAutoClicAmount3) {
+    				money -= priceAutoClicAmount3;
+    				autoClicker[2].amount += 50;
+    				priceAutoClicAmount3 *= 2;
+    				document.getElementById("butAutoAmount3").innerHTML = "Auto-clicker Timer Rank.3 [" + priceAutoClicAmount3 + "]";
+    			}
+    			else
+    				console.log("Croustipute !");
+    			break;
+    	}
+        document.getElementById("money").innerHTML = money;
+
+    }
+
+    function resetAutoClicker(choice) {
+    	switch (choice) {
+    		case 0:
+    			clearInterval(chronoAuto1);
+    			var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
+    			break;
+    		case 1:
+    			clearInterval(chronoAuto2);
+    			var chronoAuto2 = (setInterval("autoClicking(autoClicker[1])", autoClicker[1].timer));
+    			break;
+    		case 2:
+    			clearInterval(chronoAuto3);
+    			var chronoAuto3 = (setInterval("autoClicking(autoClicker[2])", autoClicker[2].timer));
+    			break;
+    	}
+    }
 
     var autoClicker = [
         {
@@ -117,13 +238,10 @@
         },
     ];
 
-    var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
-    var chronoAuto2 = (setInterval("autoClicking(autoClicker[1])", autoClicker[1].timer));
-    var chronoAuto3 = (setInterval("autoClicking(autoClicker[2])", autoClicker[2].timer));
-
     function autoClicking(autoInfo) {
         score += autoInfo.amount;
-        document.getElementById("score").innerHTML = score;
+        money += autoInfo.amount;
+        document.getElementById("money").innerHTML = money;
     }
 
     function Begin(){
@@ -131,6 +249,9 @@
         if (checkname != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
+            var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
+   			var chronoAuto2 = (setInterval("autoClicking(autoClicker[1])", autoClicker[1].timer));
+   			var chronoAuto3 = (setInterval("autoClicking(autoClicker[2])", autoClicker[2].timer));
             StartCount();
         }else{
             document.getElementById("check").innerHTML = "Enter Your Name";
@@ -140,7 +261,8 @@
     function clickImg(){
         click++;
         score += (add * mult * multipre);
-        document.getElementById("score").innerHTML = score;
+        money += (add * mult * multipre);
+        document.getElementById("money").innerHTML = money;
         if (click == 1){
             achievement(click)
         }
