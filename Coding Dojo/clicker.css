@@ -18,9 +18,18 @@ body{
     justify-content: space-evenly;
 }
 
+.namenter{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: solid;
+    padding-bottom: 10px;
+}
+
 .tamago{
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 .tamago div p{
     font-size: 50px;
@@ -48,4 +57,26 @@ label {
 select {
     font-size: .9rem;
     padding: 2px 5px;
+}
+
+#prestige{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-style: solid;
+}
+
+#upgrades{
+    margin-bottom: 10px;
+    margin-left: 10%;
+}
+
+footer{
+    border-top: solid;
+}
+
+.sec{
+    margin-left: 50px;
 }

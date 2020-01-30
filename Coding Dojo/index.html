@@ -19,9 +19,9 @@
                 <label id="minutes">00</label>:<label id="seconds">00</label>
             </div>
         </div>
-        <div>
+        <div class="namenter">
             <div>
-                <input type="submit" value="Begin" onclick="Begin()">
+                <input type="submit" value="Begin" onclick="Begin(), startCPS(), startPrestige()">
                 <input type="submit" value="Load" onclick="load()">
                 <input type="submit" value="Recommencer" onclick="">
             </div>
@@ -45,6 +45,9 @@
         </div>
         <div>
             <p id="money">0</p>
+        </div>
+        <div>
+            <p class="sec" id="sec">0 / s</p>
         </div>
     </div>
     <div>
@@ -90,6 +93,7 @@
     var priceAutoClicAmount2 = 300;
     var priceAutoClicAmount3 = 700;
     var name = "";
+    var second = 0;
 
     var autoClicker = [
         {
@@ -252,6 +256,7 @@
         document.getElementById("money").innerHTML = money;
     }
 
+    //Begin the game when a name is entered
     function Begin(){
         name = document.getElementById("myName").value;
         if (checkname != ""){
@@ -267,8 +272,10 @@
         }
     }
 
+    //Count each click on image
     function clickImg(){
         click++;
+        ++second;
         score += (add * mult * multipre);
         money += (add * mult * multipre);
         document.getElementById("money").innerHTML = money;
@@ -278,29 +285,21 @@
         if (click % 100 == 0){
             achievement(click);
         }
-        setInterval(prestige(score), 1000);
     }
 
+    //Start count of CPS (click per second)
+    function startCPS(){
+        setInterval("clickCPS()", 1000);
+    }
+    //Count Click Per Second
+    function clickCPS(){
+        console.log(second);
+        sec = second+" / s";
+        document.getElementById("sec").innerHTML = sec;
+        second = 0;
+    }
 
-    //✗
-//✓
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementById('txt').innerHTML =
-            h + ":" + m + ":" + s;
-        var t = setTimeout(startTime, 500);
-    }
-    function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-        return i;
-    }
-    //✗
-//✓
+    //unlock achievement when a number of click is reach
     function achievement(click){
         switch (click) {
             case 1:
@@ -355,9 +354,12 @@
                 break;
         }
     }
-    var test = 120760;
 
-
+    //Start check of score every second to unlock prestige level
+    function startPrestige(){
+        setInterval("prestige(score)", 1000);
+    }
+    //unlock prestige level every 10000 points
     function prestige(score){
         pre = Math.floor(score / 10000);
         pres = "Prestige Level "+ pre;
@@ -365,6 +367,7 @@
         multipre == pre;
     }
 
+    //Change the skin's avatar
     function Skin() {
         var e = document.getElementById("skin");
         var strUser = e.options[e.selectedIndex].value;
@@ -386,16 +389,17 @@
     var secondsLabel = document.getElementById("seconds");
     var totalSeconds = 0;
 
+    //Start chrono
     function StartCount(){
         setInterval(setTime, 1000);
     }
-
+    //Count time in-game and display it
     function setTime(){
         ++totalSeconds;
         secondsLabel.innerHTML = pad(totalSeconds%60);
         minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
     }
-
+    //Convert number to String
     function pad(val){
         var valString = val + "";
         if (valString.length < 2){
@@ -405,6 +409,7 @@
         }
     }
 
+    //Get the current hours
     function startTime(){
         var today = new Date();
         var h = today.getHours();
