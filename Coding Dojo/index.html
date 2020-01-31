@@ -75,8 +75,9 @@
 </footer>
 </body>
 <script>
+    const delayMult = 0.8;
+    const critRate = 0.05;
     var click = 0;
-	const delayMult = 0.8;
     var multipre = 1;
     var score = 0;
     var money = 0;
@@ -274,10 +275,12 @@
 
     //Count each click on image
     function clickImg(){
+        let critAmount = 1;
         click++;
         ++second;
-        score += (add * mult * multipre);
-        money += (add * mult * multipre);
+        critAmount = calcCrits(critAmount);
+        score += (critAmount * add * mult * multipre);
+        money += (critAmount * add * mult * multipre);
         document.getElementById("money").innerHTML = money;
         if (click == 1){
             achievement(click)
@@ -285,6 +288,14 @@
         if (click % 100 == 0){
             achievement(click);
         }
+    }
+
+    //Double the score obtained on a click if player is lucky
+    function calcCrits(critAmount) {
+        let dice = Math.random();
+        if (dice <= critRate)
+            critAmount = 2;
+        return critAmount;
     }
 
     //Start count of CPS (click per second)
