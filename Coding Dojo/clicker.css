@@ -68,9 +68,9 @@ select {
     border-style: solid;
 }
 
-#upgrades{
-    margin-bottom: 10px;
-    margin-left: 10%;
+.upgrades div{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 footer{
