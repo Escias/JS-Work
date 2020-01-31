@@ -78,8 +78,9 @@
         <p>Coding Dojo > Tama Clicker by Jimmy L., Anthony B., Clément N., Axel P.</p>
     </div>
     <button onclick="save()">Save</button>
-    <div id="saving-box" style="visibility: hidden">
-        <p>Copy this: </p>
+    <div id="saving-box">
+        <input type="text" value="" id="myInput">
+        <p></p>
     </div>
 </footer>
 </body>
@@ -473,9 +474,13 @@
                 }
             ]
         );
+        let copyText = document.getElementById("myInput");
+        copyText.value = savelog;
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
         let doc = document.getElementById("saving-box");
-        doc.style.visibility = "visible";
-        doc.children[0].innerHTML = savelog;
+        doc.children[1].innerHTML = "Saved to clipboard";
     }
 
     // take a json string, parse it then use the data to load a game
