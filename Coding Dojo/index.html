@@ -259,7 +259,7 @@
     //Begin the game when a name is entered
     function Begin(){
         name = document.getElementById("myName").value;
-        if (checkname != ""){
+        if (name != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
             var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
