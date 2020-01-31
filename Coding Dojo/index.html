@@ -169,7 +169,7 @@
     			if (money >= priceMult) {
     				money -= priceMult;
     				add *= 1.5;
-    				priceMult = priceMult * 1.5;
+    				priceMult = Math.round(priceMult * 1.5);
     				document.getElementById("butMult").innerHTML = "Multiplicators [" + priceMult + "]";
     			}
     			else
