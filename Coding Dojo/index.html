@@ -268,9 +268,9 @@
     }
 
     //Begin the game when a name is entered
-    function Begin(){
-        checkname = document.getElementById("myName").value;
-        if (checkname != ""){
+    function begin(){
+        name = document.getElementById("myName").value;
+        if (name != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
             var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
@@ -519,5 +519,6 @@
         priceAutoClicAmount3 = parsedData.priceAutoClicAmount3;
         name = parsedData.name;
     }
+    begin();
 </script>
 </html>
