@@ -85,8 +85,9 @@
 </footer>
 </body>
 <script>
+    const delayMult = 0.8;
+    const critRate = 0.05;
     var click = 0;
-	const delayMult = 0.8;
     var multipre = 1;
     var score = 0;
     var money = 0;
@@ -212,7 +213,7 @@
     				money -= priceAutoClicAmount1;
     				autoClicker[0].amount += 5;
     				priceAutoClicAmount1 *= 2;
-    				document.getElementById("butAutoAmount1").innerHTML = "Auto-clicker Timer Rank.1 [" + priceAutoClicAmount1 + "]";
+    				document.getElementById("butAutoAmount1").innerHTML = "Auto-clicker Amount Rank.1 [" + priceAutoClicAmount1 + "]";
 				}
     			else
     				console.log("Tu n'as pas assez de BDZHUGDIJ");
@@ -222,7 +223,7 @@
     				money -= priceAutoClicAmount2;
     				autoClicker[1].amount += 20;
     				priceAutoClicAmount2 *= 2;
-    				document.getElementById("butAutoAmount2").innerHTML = "Auto-clicker Timer Rank.2 [" + priceAutoClicAmount2 + "]";
+    				document.getElementById("butAutoAmount2").innerHTML = "Auto-clicker Amount Rank.2 [" + priceAutoClicAmount2 + "]";
     			}
     			else
     				console.log("Tu n'as pas assez de SCHNAPS");
@@ -232,7 +233,7 @@
     				money -= priceAutoClicAmount3;
     				autoClicker[2].amount += 50;
     				priceAutoClicAmount3 *= 2;
-    				document.getElementById("butAutoAmount3").innerHTML = "Auto-clicker Bonus Rank.3 [" + priceAutoClicAmount3 + "]";
+    				document.getElementById("butAutoAmount3").innerHTML = "Auto-clicker Amount Rank.3 [" + priceAutoClicAmount3 + "]";
     			}
     			else
     				console.log("Croustipute !");
@@ -284,10 +285,12 @@
 
     //Count each click on image
     function clickImg(){
+        let critAmount = 1;
         click++;
         ++second;
-        score += Math.round(add * mult * multipre);
-        money += Math.round(add * mult * multipre);
+        critAmount = calcCrits(critAmount);
+        score += Math.round(critAmount * add * mult * multipre);
+        money += Math.round(critAmount * add * mult * multipre);
         document.getElementById("money").innerHTML = money;
         if (click == 1){
             achievement(click)
@@ -297,6 +300,14 @@
         }
     }
 
+
+    //Double the score obtained on a click if player is lucky
+    function calcCrits(critAmount) {
+        let dice = Math.random();
+        if (dice <= critRate)
+            critAmount = 2;
+        return critAmount;
+
     function StartInd(){
         setInterval("IndClick()", 10);
     }
@@ -305,6 +316,7 @@
         indClick = Math.round(add * mult * multipre);
         text = "Click Value "+indClick;
         document.getElementById("indice").innerHTML = text;
+
     }
 
     //Start count of CPS (click per second)
