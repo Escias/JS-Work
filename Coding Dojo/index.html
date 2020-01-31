@@ -21,7 +21,7 @@
         </div>
         <div class="namenter">
             <div>
-                <input type="submit" value="Begin" onclick="Begin(), startCPS(), startPrestige()">
+                <input type="submit" value="Begin" onclick="Begin(), startCPS(), startPrestige(), StartInd()">
                 <input type="submit" value="Load" onclick="load()">
                 <input type="submit" value="Recommencer" onclick="">
             </div>
@@ -49,6 +49,9 @@
         <div>
             <p class="sec" id="sec">0 / s</p>
         </div>
+    </div>
+    <div>
+        <p id="indice">Click Value 1</p>
     </div>
     <div>
         <p id="prestige">Prestige Level 0</p>
@@ -291,6 +294,16 @@
         if (click % 100 == 0){
             achievement(click);
         }
+    }
+
+    function StartInd(){
+        setInterval("IndClick()", 10);
+    }
+
+    function IndClick(){
+        indClick = Math.round(add * mult * multipre);
+        text = "Click Value "+indClick;
+        document.getElementById("indice").innerHTML = text;
     }
 
     //Start count of CPS (click per second)
