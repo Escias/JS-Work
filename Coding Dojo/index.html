@@ -21,7 +21,7 @@
         </div>
         <div class="namenter">
             <div>
-                <input type="submit" value="Begin" onclick="begin(false), startCPS(), startPrestige(), StartInd()">
+                <input type="submit" value="Begin" onclick="begin(), startCPS(), startPrestige(), StartInd()">
                 <input type="submit" value="Load" onclick="load()">
                 <input type="submit" value="Recommencer" onclick="">
             </div>
@@ -269,7 +269,7 @@
     }
 
     //Begin the game when a name is entered
-    function begin(load){
+    function begin(){
         name = document.getElementById("myName").value;
         if (name != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
@@ -277,9 +277,7 @@
             var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
    			var chronoAuto2 = (setInterval("autoClicking(autoClicker[1])", autoClicker[1].timer));
    			var chronoAuto3 = (setInterval("autoClicking(autoClicker[2])", autoClicker[2].timer));
-   			if (load === false) {
-                StartCount();
-            }
+   			StartCount();
         }
         else {
             document.getElementById("check").innerHTML = "Enter Your Name";
@@ -520,7 +518,7 @@
         priceAutoClicAmount2 = parsedData.priceAutoClicAmount2;
         priceAutoClicAmount3 = parsedData.priceAutoClicAmount3;
         name = parsedData.name;
-        begin(true);
+        begin();
     }
 </script>
 </html>
