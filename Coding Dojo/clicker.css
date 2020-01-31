@@ -59,6 +59,14 @@ select {
     padding: 2px 5px;
 }
 
+#indice{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    margin-left: 40%;
+    margin-right: 40%;
+    border-style: solid;
+}
 #prestige{
     display: flex;
     justify-content: space-evenly;
@@ -68,9 +76,9 @@ select {
     border-style: solid;
 }
 
-#upgrades{
-    margin-bottom: 10px;
-    margin-left: 10%;
+.upgrades div{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 footer{

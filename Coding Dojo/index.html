@@ -21,7 +21,7 @@
         </div>
         <div class="namenter">
             <div>
-                <input type="submit" value="Begin" onclick="Begin(), startCPS(), startPrestige()">
+                <input type="submit" value="Begin" onclick="Begin(), startCPS(), startPrestige(), StartInd()">
                 <input type="submit" value="Load" onclick="load()">
                 <input type="submit" value="Recommencer" onclick="">
             </div>
@@ -51,17 +51,26 @@
         </div>
     </div>
     <div>
+        <p id="indice">Click Value 1</p>
+    </div>
+    <div>
         <p id="prestige">Prestige Level 0</p>
     </div>
-    <div id="upgrades">
-        <button onclick="buyMod(0)" id="butAdd">Additioners [30]</button>
-        <button onclick="buyMod(1)" id="butMult">Multiplicators [80]</button>
-        <button onclick="buyMod(2)" id="butAutoTime1">Auto-clicker Timer Rank.1 [100]</button>
-        <button onclick="buyMod(3)" id="butAutoTime2">Auto-Clicker Timer Rank.2 [300]</button>
-        <button onclick="buyMod(4)" id="butAutoTime3">Auto-Clicker Timer Rank.3 [700]</button>
-        <button onclick="buyMod(5)" id="butAutoAmount1">Auto-clicker Bonus Rank.1 [100]</button>
-        <button onclick="buyMod(6)" id="butAutoAmount2">Auto-Clicker Bonus Rank.2 [300]</button>
-        <button onclick="buyMod(7)" id="butAutoAmount3">Auto-Clicker Bonus Rank.3 [700]</button>
+    <div id="upgrades" class="upgrades">
+        <div>
+            <button onclick="buyMod(0)" id="butAdd">Additioners [30]</button>
+            <button onclick="buyMod(1)" id="butMult">Multiplicators [80]</button>
+        </div>
+        <div>
+            <button onclick="buyMod(2)" id="butAutoTime1">Auto-clicker Timer Rank.1 [100]</button>
+            <button onclick="buyMod(3)" id="butAutoTime2">Auto-Clicker Timer Rank.2 [300]</button>
+            <button onclick="buyMod(4)" id="butAutoTime3">Auto-Clicker Timer Rank.3 [700]</button>
+        </div>
+        <div>
+            <button onclick="buyMod(5)" id="butAutoAmount1">Auto-clicker Bonus Rank.1 [100]</button>
+            <button onclick="buyMod(6)" id="butAutoAmount2">Auto-Clicker Bonus Rank.2 [300]</button>
+            <button onclick="buyMod(7)" id="butAutoAmount3">Auto-Clicker Bonus Rank.3 [700]</button>
+        </div>
     </div>
 </div>
 <footer>
@@ -158,7 +167,7 @@
     			if (money >= priceMult) {
     				money -= priceMult;
     				add *= 1.5;
-    				priceMult += 10;
+    				priceMult = priceMult * 1.5;
     				document.getElementById("butMult").innerHTML = "Multiplicators [" + priceMult + "]";
     			}
     			else
@@ -222,7 +231,7 @@
     				money -= priceAutoClicAmount3;
     				autoClicker[2].amount += 50;
     				priceAutoClicAmount3 *= 2;
-    				document.getElementById("butAutoAmount3").innerHTML = "Auto-clicker Timer Rank.3 [" + priceAutoClicAmount3 + "]";
+    				document.getElementById("butAutoAmount3").innerHTML = "Auto-clicker Bonus Rank.3 [" + priceAutoClicAmount3 + "]";
     			}
     			else
     				console.log("Croustipute !");
@@ -258,8 +267,8 @@
 
     //Begin the game when a name is entered
     function Begin(){
-        name = document.getElementById("myName").value;
-        if (name != ""){
+        checkname = document.getElementById("myName").value;
+        if (checkname != ""){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
             var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
@@ -276,8 +285,8 @@
     function clickImg(){
         click++;
         ++second;
-        score += (add * mult * multipre);
-        money += (add * mult * multipre);
+        score += Math.round(add * mult * multipre);
+        money += Math.round(add * mult * multipre);
         document.getElementById("money").innerHTML = money;
         if (click == 1){
             achievement(click)
@@ -287,13 +296,22 @@
         }
     }
 
+    function StartInd(){
+        setInterval("IndClick()", 10);
+    }
+
+    function IndClick(){
+        indClick = Math.round(add * mult * multipre);
+        text = "Click Value "+indClick;
+        document.getElementById("indice").innerHTML = text;
+    }
+
     //Start count of CPS (click per second)
     function startCPS(){
         setInterval("clickCPS()", 1000);
     }
     //Count Click Per Second
     function clickCPS(){
-        console.log(second);
         sec = second+" / s";
         document.getElementById("sec").innerHTML = sec;
         second = 0;
