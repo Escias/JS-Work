@@ -244,6 +244,7 @@
     }
 
     function resetAutoClicker(choice) {
+        console.log(autoClicker);
     	switch (choice) {
     		case 0:
     			clearInterval(chronoAuto1);
@@ -499,7 +500,8 @@
     // take a json string, parse it then use the data to load a game
     function load() {
         let data = document.getElementById("load").value;
-        let parsedData = JSON.parse(data);
+        let parsedData = JSON.parse(data)[0];
+        console.log(parsedData)
         click = parsedData.click;
         multipre =  parsedData.multipre;
         score = parsedData.score;
