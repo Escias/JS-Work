@@ -8,7 +8,7 @@
 <body onload="startTime()">
 <form onsubmit="return false">
 </form>
-    <div>
+    <div class="ok2">
         <div class="enter">
             <div>
                 <p>Player Name : <input type="text" name="name" size="25" id="myName"></p>
@@ -23,7 +23,7 @@
             <div>
                 <input type="submit" value="Begin" onclick="begin(), startCPS(), startPrestige(), StartInd()">
                 <input type="submit" value="Load" onclick="load()">
-                <input type="submit" value="Recommencer" onclick="">
+                <p id="check">...</p>
             </div>
             <div>
                 <label for="skin">Choose your skin : </label>
@@ -37,8 +37,8 @@
                 <input type="submit" value="Change Skin" onclick="Skin()">
             </div>
         </div>
-        <p id="check">...</p>
     </div>
+<div class="ok">
     <div class="tamago">
         <div>
             <img class="tama" id="tama" src="img/tama.png">
@@ -72,6 +72,7 @@
             <button onclick="buyMod(7)" id="butAutoAmount3">Auto-Clicker Bonus Rank.3 [700]</button>
         </div>
     </div>
+</div>
 </div>
 <footer>
     <div>
@@ -270,8 +271,9 @@
 
     //Begin the game when a name is entered
     function begin(){
+        var savename = name;
         name = document.getElementById("myName").value;
-        if (name != ""){
+        if (name != "" || savename != ''){
             document.getElementById("tama").setAttribute("onclick", "clickImg()");
             document.getElementById("check").innerHTML = "...";
             var chronoAuto1 = (setInterval("autoClicking(autoClicker[0])", autoClicker[0].timer));
@@ -438,7 +440,7 @@
             return valString;
         }
     }
-
+    
     //Get the current hours
     function startTime(){
         var today = new Date();

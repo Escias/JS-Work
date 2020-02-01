@@ -9,7 +9,6 @@ body{
     border-bottom-left-radius: 35px;
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
-    background-color: rgba(245, 245, 245, 0.6);
 }
 
 .enter{
@@ -18,12 +17,23 @@ body{
     justify-content: space-evenly;
 }
 
+.ok2{
+    background-color: rgba(245, 245, 245, 0.9);
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+}
+
 .namenter{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     border-bottom: solid;
     padding-bottom: 10px;
+}
+
+.ok{
+    background-color: rgba(245,245,245,0.5);
+    padding-top: 35px;
 }
 
 .tamago{
@@ -83,6 +93,10 @@ select {
 
 footer{
     border-top: solid;
+    background-color: rgba(245,245,245, 0.9);
+    padding-bottom: 5px;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
 }
 
 .sec{
