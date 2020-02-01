@@ -64,7 +64,7 @@
 </footer>
 </body>
 <script>
-    let randNbr = Math.round(Math.random() * 101);
+    var randNbr = Math.round(Math.random() * 101);
     var table = [];
     var turn = 1;
 
@@ -87,7 +87,7 @@
             document.getElementById("demo").innerHTML = "C'est plus grand";
             turn++;
         }
-        else if (randNbr === x) {
+        else if (randNbr == x) {
             document.getElementById("demo").innerHTML = "Gagné";
             table.push({
                 essaie: turn,
